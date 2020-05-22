@@ -1,0 +1,17 @@
+<nav class="main-nav">
+  <div class="left-nav">
+    <a href="<%= subs_path %>">RedditClone</a>
+  </div>
+  <div class="right-nav">
+    <% if logged_in? %>
+      <form action="<%= session_path %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+        <button class="button secondary-button">Log out</button>
+      </form>
+    <% else %>
+      <a class="button secondary-button" href="<%= new_session_path %>">Sign in</a>
+      <a class="button primary-button" href="<%= new_user_path %>">Sign up</a>
+    <% end %>
+  </div>
+</nav>

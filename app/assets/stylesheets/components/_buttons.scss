@@ -1,0 +1,42 @@
+$primary_color: #009fff;
+$secondary_color: #1bd3ff;
+$danger_color: #ee7261;
+
+.button {
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  border: 0;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.primary-button {
+  color: white;
+  background: $primary_color;
+  &:hover {
+    background: darken($primary_color, 10%);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.secondary-button {
+  color: white;
+  background: $secondary_color;
+  &:hover {
+    background: darken($secondary_color, 10%);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.danger-button {
+  color: white;
+  background: $danger_color;
+  &:hover {
+    background: darken($danger_color, 10%);
+    color: white;
+    text-decoration: none;
+  }
+}

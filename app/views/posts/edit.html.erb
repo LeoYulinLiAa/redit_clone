@@ -1,0 +1,15 @@
+<h1>Edit post</h1>
+<form action="<%= sub_post_path(current_sub, current_post) %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+  <label>Title
+    <input type="text" name="post[title]" value="<%= current_post.title %>" required>
+  </label>
+  <label>Url
+    <input type="url" name="post[url]" value="<%= current_post.url %>">
+  </label>
+  <label>Content
+    <textarea name="post[content]"><%= current_post.content %></textarea>
+  </label>
+  <button type="submit">Edit</button>
+</form>

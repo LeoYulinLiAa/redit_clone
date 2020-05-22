@@ -10,6 +10,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/main_nav' %>
+    <div class="main">
+      <%= render 'layouts/error', errors: flash[:errors] %>
+      <%= yield %>
+    </div>
   </body>
 </html>

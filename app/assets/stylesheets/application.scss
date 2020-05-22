@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+@import "base/reset";
+
+@import "base/colors";
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #333333;
+}
+
+a {
+  text-decoration: underline;
+  &:hover {
+    color: lighten(black, 50%);
+    text-decoration: underline;
+  }
+}
+
+.main {
+  margin: auto;
+  max-width: 768px;
+}
+
+@import "components/*";

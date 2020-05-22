@@ -1,0 +1,17 @@
+<h1><%= current_sub.title %></h1>
+<h2>Moderator: <%= current_sub.moderator.username %></h2>
+<pre><%= current_sub.description %></pre>
+<% if moderator? %>
+  <a href="<%= edit_sub_path(current_sub) %>">Edit</a>
+<% end %>
+<% if logged_in? %>
+  <a href="<%= new_sub_post_path(current_sub) %>">New Post</a>
+<% end %>
+<ul>
+  <% current_sub.posts.each do |post| %>
+    <li>
+      <a href="<%= sub_post_path(current_sub, post) %>"><%= post.title %></a>
+      <p><%= truncate post.content, length: 100 %></p>
+    </li>
+  <% end %>
+</ul>
