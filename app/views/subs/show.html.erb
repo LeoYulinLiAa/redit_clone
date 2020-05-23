@@ -5,12 +5,12 @@
   <a href="<%= edit_sub_path(current_sub) %>">Edit</a>
 <% end %>
 <% if logged_in? %>
-  <a href="<%= new_sub_post_path(current_sub) %>">New Post</a>
+  <a href="<%= new_post_path(current_sub) %>">New Post</a>
 <% end %>
 <ul>
   <% current_sub.posts.each do |post| %>
     <li>
-      <a href="<%= sub_post_path(current_sub, post) %>"><%= post.title %></a>
+      <a href="<%= post_path(post) %>"><%= post.title %></a>
       <p><%= truncate post.content, length: 100 %></p>
     </li>
   <% end %>

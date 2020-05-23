@@ -1,5 +1,5 @@
 <h1>New post</h1>
-<form action="<%= sub_posts_path %>" method="post">
+<form action="<%= posts_path %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <label>Title
     <input type="text" name="post[title]" value="<%= current_post.title %>" required>

@@ -1,11 +1,11 @@
 <h1><%= current_post.title %></h1>
 <h3>Author: <a href="<%= user_path(current_author) %>"><%= current_author.username %></a></h3>
 <% if full_permission? %>
-  <form action="<%= sub_post_path(current_sub, current_post) %>" method="post">
+  <form action="<%= post_path(current_post) %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <input type="hidden" name="_method" value="delete">
     <button class="button danger-button" type="submit">Delete Post</button>
   </form>
-  <a class="button secondary-button" href="<%= edit_sub_post_path(current_sub, current_post) %>">Edit Post</a>
+  <a class="button secondary-button" href="<%= edit_post_path(current_post) %>">Edit Post</a>
 <% end %>
 <p><%= sanitize simple_format(h(current_post.content)) %></p>

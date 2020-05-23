@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  helper_method :current_post, :current_sub, :current_author, :full_permission?
+  helper_method :current_post, :current_author, :full_permission?, :subs
 
   before_action :require_logged_in, except: %i[show]
   before_action :require_permission, except: %i[show new create]
@@ -21,9 +21,8 @@ class PostsController < ApplicationController
   def create
     @current_post = Post.new(post_params)
     current_post.author = current_user
-    current_post.sub = current_sub
     if current_post.save
-      redirect_to sub_path(current_sub)
+      redirect_to post_path(current_post)
     else
       flash.now[:errors] = current_post.errors.full_messages
       render :new
@@ -35,8 +34,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    if Post.find_by(sub: current_sub, id: params[:id]).update(post_params)
-      redirect_to sub_post_path(current_sub, current_post)
+    if Post.find_by_id(params[:id]).update(post_params)
+      redirect_to post_path(current_post)
     else
       flash.now[:errors] = current_post.errors.full_messages
       render :update
@@ -45,15 +44,15 @@ class PostsController < ApplicationController
 
   def destroy
     current_post.destroy
-    redirect_to sub_path(current_sub)
+    redirect_to subs_path
   end
 
   def current_post
-    @current_post ||= current_sub.posts.find_by_id(params[:id])
+    @current_post ||= Post.find_by_id(params[:id])
   end
 
-  def current_sub
-    @current_sub ||= Sub.find_by_id(params[:sub_id])
+  def subs
+    @subs ||= Sub.all
   end
 
   def current_author
@@ -67,7 +66,7 @@ class PostsController < ApplicationController
   def require_permission
     unless full_permission?
       flash[:errors] = ['Unauthorized access']
-      redirect_to sub_post_path(current_sub, current_post)
+      redirect_to post_path(current_post)
     end
   end
 
@@ -78,7 +77,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :content)
+    params.require(:post).permit(:title, :url, :content, :sub_ids)
   end
 
 end
